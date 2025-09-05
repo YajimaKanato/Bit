@@ -1,9 +1,153 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class BitManager : MonoBehaviour
 {
+    [SerializeField] Text _braveText;
+    [SerializeField] Text _influenceText;
+    [SerializeField] int _bitRange = 5;
+    [SerializeField] Text[] _stateTexts;
+
+    int _braveBit;
+    int _influenceBit;
+    bool[] _notFlag;
+    bool[] _orFlag;
+
+    int Poison = 1 << 0;
+    int Paralysis = 1 << 1;
+    int Sleep = 1 << 2;
+    int Burning = 1 << 3;
+    int Confusion = 1 << 4;
+
+
+    private void Start()
+    {
+        SetUp();
+    }
+
+    void SetUp()
+    {
+        _braveBit = 0;
+        _influenceBit = 0;
+
+        TextUpdate();
+    }
+
+    void TextUpdate()
+    {
+        for (int i = 0; i < _bitRange; i++)
+        {
+            _braveText.text = Convert.ToString(_braveBit, 2);
+            _influenceText.text = Convert.ToString(_influenceBit, 2);
+        }
+    }
+
+
+    void ANDOperation(ref int ans)
+    {
+
+
+        TextUpdate();
+    }
+
+
+    void OROperation(ref int bit, ref int multiplier)
+    {
+
+
+        TextUpdate();
+    }
+
+
+    void XOROperation(ref int bit, ref int multiplier)
+    {
+
+
+        TextUpdate();
+    }
+
+    /// <summary>
+    /// 状態異常のフラグを反転させる関数
+    /// </summary>
+    /// <param name="state">反転させたい状態異常のフラグがあるインデックス</param>
+    public void NOTOperation(int state)
+    {
+        _notFlag[state] = !_notFlag[state];
+    }
+
+
+    void LeftShift(ref int bit)
+    {
+
+
+        TextUpdate();
+    }
+
+
+    void RightShift(ref int bit)
+    {
+
+
+        TextUpdate();
+    }
+
+    public void BraveOperation(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                //ANDOperation(ref _braveBit, ref _influenceBit);
+                break;
+            case 1:
+                OROperation(ref _braveBit, ref _influenceBit);
+                break;
+            case 2:
+                XOROperation(ref _braveBit, ref _influenceBit);
+                break;
+            case 3:
+                //NOTOperation(ref _braveBit);
+                break;
+            case 4:
+                LeftShift(ref _braveBit);
+                break;
+            case 5:
+                RightShift(ref _braveBit);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void MultiplierOperation(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                ANDOperation(ref _influenceBit);
+                break;
+            case 1:
+                //OROperation(ref _influenceBit);
+                break;
+            case 2:
+                //XOROperation(ref _influenceBit);
+                break;
+            case 3:
+                //NOTOperation(ref _influenceBit);
+                break;
+            case 4:
+                LeftShift(ref _influenceBit);
+                break;
+            case 5:
+                RightShift(ref _influenceBit);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /*
     [SerializeField] GameObject[] _bitTextGroup;
     [SerializeField] GameObject _multiplierTextGroup;
     [SerializeField] GameObject _operationButtonGroup;
@@ -45,7 +189,7 @@ public class BitManager : MonoBehaviour
         {
             for (int j = 0; j < _range; j++)
             {
-                rand = Random.Range(0, 2);
+                rand = UnityEngine.Random.Range(0, 2);
                 _bitSquare[i, j] = rand;
 
                 _bitTexts[i, j] = _bitTextGroup[i].transform.GetChild(j).GetComponent<Text>();
@@ -387,5 +531,5 @@ public class BitManager : MonoBehaviour
                 _operationButtons[i].interactable = false;
             }
         }
-    }
+    }*/
 }
