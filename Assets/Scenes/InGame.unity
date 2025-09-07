@@ -2798,8 +2798,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _braveText: {fileID: 0}
   _influenceText: {fileID: 0}
-  _bitRange: 0
-  _stateTexts: []
+  _bitRange: 5
+  _stateTexts:
+  - {fileID: 1293963383}
+  - {fileID: 377604670}
+  - {fileID: 133622729}
+  - {fileID: 1023067070}
+  - {fileID: 1758936170}
 --- !u!4 &558067055
 Transform:
   m_ObjectHideFlags: 0
@@ -3902,7 +3907,7 @@ GameObject:
   - component: {fileID: 1048927474}
   - component: {fileID: 1048927475}
   m_Layer: 0
-  m_Name: StateGroup (1)
+  m_Name: StateBit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
