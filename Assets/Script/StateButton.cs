@@ -10,7 +10,7 @@ public class StateButton : MonoBehaviour
         _selectEffect.SetActive(false);
     }
 
-    public void SelectEffect()
+    public void ORSelectEffect()
     {
         _selected = !_selected;
         _selectEffect.SetActive(_selected);
