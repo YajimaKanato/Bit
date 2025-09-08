@@ -46,13 +46,16 @@ public class BitManager : MonoBehaviour
     }
 
     [SerializeField] int _bitRange = 5;
+    public int BitRange { get { return _bitRange; } }
     [SerializeField] Text[] _stateNameTexts;
     [SerializeField] Text[] _stateBitTexts;
     [SerializeField] Text _braveBitText;
 
     StateClass[] _stateClass;
+    QuestionManager _questionManager;
 
     int[] _braveBit;
+    public int[] BraveBit { get { return _braveBit; } }
     bool[] _orFlag;
 
     private void Start()
@@ -74,6 +77,8 @@ public class BitManager : MonoBehaviour
         }
 
         TextUpdate();
+
+        _questionManager = GetComponent<QuestionManager>();
     }
 
     /// <summary>
@@ -114,6 +119,7 @@ public class BitManager : MonoBehaviour
         }
 
         TextUpdate();
+        _questionManager.CheckBraveBit();
         Debug.Log("BraveAND");
     }
 
@@ -128,7 +134,7 @@ public class BitManager : MonoBehaviour
         {
             if (_orFlag[i])
             {
-                for(int j=0; j < _bitRange; j++)
+                for (int j = 0; j < _bitRange; j++)
                 {
                     stateBit[j] = _stateClass[i].Bit[j] + stateBit[j] == 0 ? 0 : 1;
                 }
@@ -142,7 +148,37 @@ public class BitManager : MonoBehaviour
         }
 
         TextUpdate();
+        _questionManager.CheckBraveBit();
         Debug.Log("BraveOR");
+    }
+
+    /// <summary>
+    /// —EÒ‚ÌXOR‰‰Z‚ğs‚¤ŠÖ”
+    /// </summary>
+    public void BraveXOROperation()
+    {
+        //‰‰Z‚ğs‚¤‚½‚ß‚Ìƒrƒbƒg¶¬
+        var stateBit = new int[_bitRange];
+        for (int i = 0; i < _bitRange; i++)
+        {
+            if (_orFlag[i])
+            {
+                for (int j = 0; j < _bitRange; j++)
+                {
+                    stateBit[j] = _stateClass[i].Bit[j] + stateBit[j] == 0 ? 0 : 1;
+                }
+            }
+        }
+
+        //‰‰ZÀs
+        for (int i = 0; i < _bitRange; i++)
+        {
+            _braveBit[i] = _braveBit[i] != stateBit[i] ? 1 : 0;
+        }
+
+        TextUpdate();
+        _questionManager.CheckBraveBit();
+        Debug.Log("BraveXOR");
     }
 
     /// <summary>
